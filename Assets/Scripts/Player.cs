@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask brickLayer;
     [SerializeField] private LayerMask finishLayer;
     [SerializeField] private LayerMask pushLayer;
+    [SerializeField] private LayerMask teleporterLayer;
     void OnInit(){
         isMoving = false; 
         startPosition = transform.position;
@@ -35,6 +36,9 @@ public class Player : MonoBehaviour
             if(Vector3.Distance(transform.position, new Vector3(currentBrickPosition.x, transform.position.y, currentBrickPosition.z)) < 0.1f){
                 if (CheckDropBrick() || CheckPush()){
                     ChangeDirection();
+                }else if (CheckTeleporter()){
+                    Debug.Log("Teleport");
+                    Teleport();
                 }else{
                     isMoving = false;
                 }
@@ -140,7 +144,6 @@ public class Player : MonoBehaviour
    }
 
    bool CheckBrickAtDirection(Direction dir){
-        RaycastHit brick;
         Vector3 brickPosition = Vector3.zero;
         Vector3 direction = Vector3.zero;
         switch(dir){
@@ -157,7 +160,7 @@ public class Player : MonoBehaviour
                 direction = Vector3.back; 
                 break;
         }
-        if (Physics.Raycast(transform.position + direction + Vector3.up, Vector3.down, out brick, Mathf.Infinity, brickLayer)){
+        if (Physics.Raycast(transform.position + direction + Vector3.up, Vector3.down, Mathf.Infinity, brickLayer)){
             return true;
         }
         return false;
@@ -165,12 +168,25 @@ public class Player : MonoBehaviour
    }
 
    bool CheckPush(){
-        RaycastHit push;
-
-        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out push, Mathf.Infinity, pushLayer)){
-            Debug.Log("Found push");
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, Mathf.Infinity, pushLayer)){
             return true;
         }
         return false;
+   }
+
+   bool CheckTeleporter(){
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, Mathf.Infinity, teleporterLayer)){
+            return true;
+        }
+        return false;
+   }
+   void Teleport(){
+        RaycastHit teleporter;
+        Vector3 otherTeleporterPosition = Vector3.zero;
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out teleporter, Mathf.Infinity, teleporterLayer)){
+            otherTeleporterPosition = teleporter.transform.GetComponent<Teleporter>().otherTeleporter.position;
+        }
+        transform.position = new Vector3(otherTeleporterPosition.x, transform.position.y, otherTeleporterPosition.z); 
+        // currentBrickPosition = GetBrickAtDirection(this.dir);
    }
 } 
