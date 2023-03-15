@@ -6201,6 +6201,9 @@ MonoBehaviour:
   pushLayer:
     serializedVersion: 2
     m_Bits: 256
+  teleporterLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &10121950
 MonoBehaviour:
   m_ObjectHideFlags: 0
