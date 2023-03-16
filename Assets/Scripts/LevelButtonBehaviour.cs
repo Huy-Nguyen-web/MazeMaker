@@ -4,10 +4,9 @@ using TMPro;
 public class LevelButtonBehaviour : MonoBehaviour
 {
     [SerializeField] private TMP_Text buttonText; 
-    public string level;
-    void Start(){
-        Debug.Log(level);
-        buttonText.text = level;
+    [SerializeField] private int level;
+    private void Awake() {
+        buttonText.text = name;    
     }
     public void ChangeLevel(){
         SceneManager.LoadScene(level);

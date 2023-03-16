@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -27,5 +26,8 @@ public class UIManager : MonoBehaviour
     }
     public void ShowHighScore(int score){
         highScoreText.text = "High Score: " + score.ToString();
+    }
+    public void BackToMainMenu(){
+        SceneManager.LoadScene(0);
     }
 }

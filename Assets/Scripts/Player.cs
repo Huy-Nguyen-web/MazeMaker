@@ -187,6 +187,6 @@ public class Player : MonoBehaviour
             otherTeleporterPosition = teleporter.transform.GetComponent<Teleporter>().otherTeleporter.position;
         }
         transform.position = new Vector3(otherTeleporterPosition.x, transform.position.y, otherTeleporterPosition.z); 
-        // currentBrickPosition = GetBrickAtDirection(this.dir);
+        currentBrickPosition = GetBrickAtDirection(this.dir);
    }
 } 
