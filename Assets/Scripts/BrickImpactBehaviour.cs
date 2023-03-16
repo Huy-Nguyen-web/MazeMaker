@@ -43,9 +43,11 @@ public class BrickImpactBehaviour: MonoBehaviour
                 transform.position += Vector3.up * brickHeight;
                 var currentBrickMesh = Instantiate(brickMesh, new Vector3(transform.position.x, transform.position.y - (brickHeight * brickNum ) - brickHeight, transform.position.z), Quaternion.Euler(-90, 0, 0), transform);
                 bricks.Add(currentBrickMesh);
-                animator.SetTrigger("take_brick_trigger");
+                animator.SetBool("take_brick", true);
                 uiManager.UpdateScore(bricks.Count);
-            } 
+            } else {
+                animator.SetBool("take_brick", false);
+            }
         }
    }
    void DropBrick(){

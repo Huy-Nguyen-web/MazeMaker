@@ -21,16 +21,13 @@ public class Player : MonoBehaviour
         startPosition = transform.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         OnInit();
         gameEnd = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         if (isMoving){
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(currentBrickPosition.x, transform.position.y, currentBrickPosition.z), Time.deltaTime * speed);
             if(Vector3.Distance(transform.position, new Vector3(currentBrickPosition.x, transform.position.y, currentBrickPosition.z)) < 0.1f){
@@ -74,9 +71,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        
-
-}
+    }
 
     Vector3 GetBrickAtDirection(Direction dir)
     {
