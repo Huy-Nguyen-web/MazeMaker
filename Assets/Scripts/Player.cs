@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private enum Direction {Left, Right, Up, Down};
     private Direction dir;
     public bool gameEnd;
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private LayerMask brickLayer;
     [SerializeField] private LayerMask finishLayer;
     [SerializeField] private LayerMask pushLayer;
@@ -19,14 +19,13 @@ public class Player : MonoBehaviour
     void OnInit(){
         isMoving = false; 
         startPosition = transform.position;
+        gameEnd = false;
     }
 
     void Start(){
         OnInit();
-        gameEnd = false;
     }
 
-    // Update is called once per frame
     void Update(){
         if (isMoving){
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(currentBrickPosition.x, transform.position.y, currentBrickPosition.z), Time.deltaTime * speed);
@@ -36,6 +35,9 @@ public class Player : MonoBehaviour
                 }else if (CheckTeleporter()){
                     Debug.Log("Teleport");
                     Teleport();
+                }else if (CheckFinish()){
+                    Debug.Log("Finish");
+                    Finish();
                 }else{
                     isMoving = false;
                 }
@@ -98,7 +100,6 @@ public class Player : MonoBehaviour
             brickPosition = brick.transform.position;
             tileNum++;
         }
-        Debug.Log(brickPosition);
         if (tileNum > 1) {
             return brickPosition;
         } else {
@@ -183,5 +184,40 @@ public class Player : MonoBehaviour
         }
         transform.position = new Vector3(otherTeleporterPosition.x, transform.position.y, otherTeleporterPosition.z); 
         currentBrickPosition = GetBrickAtDirection(this.dir);
+   }
+   bool CheckFinish(){
+        RaycastHit finish;
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out finish, Mathf.Infinity, brickLayer)){
+            if(finish.transform.gameObject.tag == "Finish"){
+                return true;
+            }
+            return false;
+        }
+        return false;
+   }
+   public void Finish(){
+        RaycastHit finish;
+        Vector3 direction = Vector3.zero;
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out finish, Mathf.Infinity, brickLayer)){
+            if(finish.transform.gameObject.tag == "Finish"){
+                switch(dir){
+                    case Direction.Left:
+                        direction = Vector3.left; 
+                        break;
+                    case Direction.Right:
+                        direction = Vector3.right;
+                        break;
+                    case Direction.Up:
+                        direction = Vector3.forward; 
+                        break;
+                    case Direction.Down:
+                        direction = Vector3.back; 
+                        break;
+                }
+                currentBrickPosition = transform.position + direction * 7;
+                WinPosBehaviour winPosBehaviour = new WinPosBehaviour();
+                winPosBehaviour.EndGame();
+            }
+        }
    }
 } 
