@@ -33,17 +33,14 @@ public class Player : MonoBehaviour
                 if (CheckDropBrick() || CheckPush()){
                     ChangeDirection();
                 }else if (CheckTeleporter()){
-                    Debug.Log("Teleport");
                     Teleport();
                 }else if (CheckFinish()){
-                    Debug.Log("Finish");
                     Finish();
                 }else{
                     isMoving = false;
                 }
             }
         }
-
         if (gameEnd) return;
         if (Input.GetMouseButtonDown(0)){
             mousePositionStart = Input.mousePosition;
