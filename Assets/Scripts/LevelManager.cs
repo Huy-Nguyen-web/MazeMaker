@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 public class LevelManager : MonoBehaviour
 {
     public void RestartLevel(){

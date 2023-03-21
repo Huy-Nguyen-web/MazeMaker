@@ -10987,9 +10987,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7153084149533222424, guid: e83c8e1d353a07c42bb135a5d2601735, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 2039
+      objectReference: {fileID: 0}
     - target: {fileID: 7153084149533222425, guid: e83c8e1d353a07c42bb135a5d2601735, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153084149533222425, guid: e83c8e1d353a07c42bb135a5d2601735, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7153084150394290231, guid: e83c8e1d353a07c42bb135a5d2601735, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -53536,6 +53544,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 649121457}
     m_Modifications:
+    - target: {fileID: 915034551862026943, guid: 91a90fb4edccbc146a5c5277fe2c70a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 915473045089896382, guid: 91a90fb4edccbc146a5c5277fe2c70a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5267848306627416008, guid: 91a90fb4edccbc146a5c5277fe2c70a6, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -92,6 +92,7 @@ public class BrickImpactBehaviour: MonoBehaviour
                 GetComponent<Player>().Finish();
                 animator.SetTrigger("finish_level");
                 winPos.EndGame();
+                player.gameEnd = true;
                 Invoke(nameof(EndGame), 3.0f);
             }
         }
@@ -110,6 +111,5 @@ public class BrickImpactBehaviour: MonoBehaviour
    }
    void EndGame(){
         uiManager.EndLevelPopUp();
-        player.gameEnd = true;
    }
 }
